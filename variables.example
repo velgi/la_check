@@ -1,0 +1,2 @@
+SERVERS=(first-serv-group{1,2,3,4,5} second-serv-group{1,2,3,4,5})
+HOST="test-host.net"
