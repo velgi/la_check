@@ -1,0 +1,12 @@
+[Unit]
+Description=Checker LA for groups of servers
+After=multi-user.target
+
+[Service]
+Type=simple
+EnvironmentFile=%h/.config/systemd/user/default/la_check
+ExecStart=/bin/bash %h/${SCRIPT_DIR}/la_check.sh 
+TimeoutSec=10
+
+[Install]
+WantedBy=default.target

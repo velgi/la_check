@@ -15,7 +15,7 @@ script_dir=`dirname $script_path`
 . $script_dir/variables
 ####################################
 
-echo "" > ${script_dir}/la.log
+echo > ${script_dir}/la.log
 
 
 while true
@@ -25,7 +25,7 @@ do
   for serv in ${SERVERS[@]}
   do
     echo $serv >> ${script_dir}/la.log
-    LA=`ssh -q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${SSH_USER}@${serv}.${HOST} "sudo su - root -c 'cat /proc/loadavg'"`
+    LA=$(ssh -q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${SSH_USER}@${serv}.${HOST} "sudo su - root -c 'cat /proc/loadavg'")
     FULL_LA=`echo $LA | awk '{print $1" "$2" "$3}'`
     echo $FULL_LA >> ${script_dir}/la.log
     ONE_MINUTE=`echo $LA | awk '{print $1}'`
