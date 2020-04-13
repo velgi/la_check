@@ -26,8 +26,7 @@ do
   do
     echo $serv >> ${script_dir}/la.log
     LA=$(ssh -q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${SSH_USER}@${serv}.${HOST} "sudo su - root -c 'cat /proc/loadavg'")
-    FULL_LA=`echo $LA | awk '{print $1" "$2" "$3}'`
-    echo $FULL_LA >> ${script_dir}/la.log
+    echo $LA | awk '{print $1" "$2" "$3}' >> ${script_dir}/la.log
     ONE_MINUTE=`echo $LA | awk '{print $1}'`
     FIVE_MINUTES=`echo $LA | awk '{print $2}'`
     FIFTEEN_MINUTES=`echo $LA | awk '{print $3}'`
@@ -50,7 +49,7 @@ do
 
     if [ $CHECK_DIFF_ONE_FIVE_MINUTES = "1" ]
     then 
-      notify-send -t 60000 "<span color='#d60b00'>${serv} LA ALERT</span>" "<span color='#19029c'>Diff 1-5 min LA: ---${DIFF_ONE_FIVE_MINUTES}---</span>"
+      notify-send -t 60000 "<span color='#e39c0e'>${serv} LA ALERT</span>" "<span color='#19029c'>Diff 1-5 min LA: ---${DIFF_ONE_FIVE_MINUTES}---</span>"
       echo "WARN! 1-5 min LA diff to high: $DIFF_ONE_FIVE_MINUTES" >> ${script_dir}/la.log
     fi
     #######################################################################################################
@@ -62,7 +61,7 @@ do
 
     if [ $CHECK_DIFF_ONE_FIFTEEN_MINUTES = "1" ]
     then
-      notify-send -t 60000 "<span color='#d60b00'>${serv} LA ALERT</span>" "<span color='#19029c'>Diff 1-15 min LA: ---${DIFF_ONE_FIFTEEN_MINUTES}---</span>"
+      notify-send -t 60000 "<span color='#e39c0e'>${serv} LA ALERT</span>" "<span color='#19029c'>Diff 1-15 min LA: ---${DIFF_ONE_FIFTEEN_MINUTES}---</span>"
       echo "WARN! 1-15 min LA diff to high: $DIFF_ONE_FIFTEEN_MINUTES" >> ${script_dir}/la.log
     fi
     ############################################################################
